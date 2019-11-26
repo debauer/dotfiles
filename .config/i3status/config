@@ -1,0 +1,89 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+        color_good = "#2AA198"
+        color_bad = "#586E75"
+        color_degraded = "#DC322F"
+}
+
+
+order += "battery all"
+order += "path_exists VPN"
+order += "wireless wlp0s20f3"
+order += "ethernet enp0s31f6"
+order += "disk /"
+order += "cpu_usage"
+order += "load"
+order += "memory"
+order += "tztime local"
+
+cpu_usage {
+        format = " cpu  %usage "
+}
+
+load {
+        format = " %1min "
+        # max_threshold = 0.3
+}
+
+disk "/" {
+        # format = " hdd %avail "
+        format = " ⛁ %avail "
+}
+
+wireless wlp0s20f3 {
+# if you use %speed, i3status requires root privileges
+        format_up = " wlan: %ip "
+        format_down = " no lan "
+}
+
+ethernet enp0s31f6 {
+# if you use %speed, i3status requires root privileges
+        format_up = " lan: %ip"
+        format_down = ""
+}
+
+battery all {
+        # format = "%status %percentage %remaining %emptytime"
+        format = " %status %percentage %emptytime"
+        format_down = "No battery"
+        last_full_capacity = true
+        integer_battery_capacity = true
+        # status_chr = ""
+        status_chr = "⚡"
+        # status_bat = "bat"
+        # status_bat = "☉"
+        status_bat = ""
+        # status_unk = "?"
+        status_unk = ""
+        # status_full = ""
+        status_full = "☻"
+        low_threshold = 15
+        threshold_type = time
+}
+
+memory {
+        format = "%used | %available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+        # format = "%Y-%m-%d %H:%M:%S"
+        format = " %d.%m. %H:%M "
+}
+
+path_exists VPN {
+     # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+     path = "/proc/sys/net/ipv4/conf/tun0"
+     format = "VPN"
+     format_down = ""
+}
