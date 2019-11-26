@@ -8,7 +8,7 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-default_border pixel 1
+default_border pixel 3
 default_floating_border normal
 
 # Hide borders
@@ -97,12 +97,6 @@ bindsym $mod+Ctrl+Left move workspace to output left
 bindsym $mod+Ctrl+Up move workspace to output up
 bindsym $mod+Ctrl+Down move workspace to output down
 
-bindsym $mod+Ctrl+1 exec ~/.screenlayout/OnlyLaptop.sh; workspace $browser_workspace output $monitor_two
-bindsym $mod+Ctrl+2 exec ~/.screenlayout/2DisBuero.sh
-bindsym $mod+Ctrl+3 exec ~/.screenlayout/3DisBuero.sh
-#bindsym $mod+Ctrl+4 exec ~/.screenlayout/MirrorHdmi.sh
-
-
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
@@ -157,14 +151,14 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 
 # Move focused container to workspace
-#bindsym $mod+Ctrl+1 move container to workspace $ws1
-#bindsym $mod+Ctrl+2 move container to workspace $ws2
-#bindsym $mod+Ctrl+3 move container to workspace $ws3
-#bindsym $mod+Ctrl+4 move container to workspace $ws4
-#bindsym $mod+Ctrl+5 move container to workspace $ws5
-#bindsym $mod+Ctrl+6 move container to workspace $ws6
-#bindsym $mod+Ctrl+7 move container to workspace $ws7
-#bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+1 move container to workspace $ws1
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
@@ -236,8 +230,17 @@ mode "$mode_system" {
     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
     bindsym r exec --no-startup-id i3exit reboot, mode "default"
     bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
-    # exit system mode: "Enter" or "Escape"
+set $screensetting (1) Laptop (2) Laptop + 1 Screen TOP (3) Laptop + 2 Screen Top+Left
+bindsym $mod+Ctrl+s mode "$screensetting"
+mode "$screensetting" {
+    bindsym 1 exec ~/.screenlayout/OnlyLaptop.sh, mode "default"
+    bindsym 2 exec ~/.screenlayout/2DisBuero.sh, mode "default"
+    bindsym 3 exec ~/.screenlayout/3DisBuero.sh, mode "default"
+    #bindsym 4 exec ~/.screenlayout/MirrorHdmi.sh, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -245,25 +248,12 @@ mode "$mode_system" {
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # exit resize mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 # Lock screen
