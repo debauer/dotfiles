@@ -1,0 +1,13 @@
+[user]
+	email = bauer@synyx.de
+	name = David Bauer
+
+[gui]
+	spellingdictionary = en_GB
+
+[alias]
+	cp = cherry-pick
+	st = status
+	fp = fetch --prune
+	cob = checkout -b
+	co = checkout
