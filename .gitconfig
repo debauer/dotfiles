@@ -9,5 +9,4 @@
 	cp = cherry-pick
 	st = status
 	fp = fetch --prune
-	cob = checkout -b
-	co = checkout
+	history = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
