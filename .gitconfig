@@ -9,7 +9,7 @@
 	cp = cherry-pick
 	st = status
 	fp = fetch --prune
-	history = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short -n 20
+	history = log --graph --pretty=tformat:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short -n 10
 	
 [pager]
 	log = false

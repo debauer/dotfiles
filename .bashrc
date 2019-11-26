@@ -65,7 +65,6 @@ alias DISPLAY_EXTERNR="DP1"
 alias DISPLAY_EXTERNL="DP2"
 alias DISPLAY_HDMI="HDMI1"
 
-
 alias cp="cp -i"                          # confirm before overwriting something
 alias lsh='ls -lah'
 alias df='df -h'                          # human-readable sizes
@@ -77,7 +76,10 @@ alias pacman='pacman --color=auto'
 alias dmesg='dmesg -T --color'
 alias setenv='~/setEnv.sh'
 alias dotfiles='/usr/bin/git --git-dir=/home/bauer/.dotfiles/ --work-tree=/home/bauer'
+alias dot='dotfiles'
+alias dotac='dot add -u && dot commit -m '
 alias gitk="gitk --all"
+
 
 # SSH Connections
 alias ssh-fablab-felix='ssh root@192.168.1.6'
