@@ -94,6 +94,12 @@ export PATH="$PATH:/home/bauer/toolchain/flutter/bin"
 
 unset use_color safe_term match_lhs sh
 
+alias DISPLAY_INTERN="eDP1"
+alias DISPLAY_EXTERNR="DP1"
+alias DISPLAY_EXTERNL="DP2"
+alias DISPLAY_HDMI="HDMI1"
+
+
 alias cp="cp -i"                          # confirm before overwriting something
 alias lsh='ls -lah'
 alias df='df -h'                          # human-readable sizes

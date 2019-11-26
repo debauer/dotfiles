@@ -50,6 +50,20 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
+# Workspace names
+# to display names or symbols instead of plain workspace numbers you can use
+# something like: set $ws1 1:mail
+#                 set $ws2 2:
+
+set $ws1 1:1:WWW
+set $ws2 2:2:IDE
+set $ws3 3:3:TERM
+set $ws4 4:4:VM|DLT
+set $ws5 5:5:MISC
+set $ws6 6:6:IRC|Musik
+set $ws7 7:7:mail
+set $ws8 8:8:pw
+
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F3 exec pcmanfm
@@ -78,6 +92,17 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+bindsym $mod+Ctrl+Right move workspace to output right
+bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+Down move workspace to output down
+
+bindsym $mod+Ctrl+1 exec ~/.screenlayout/OnlyLaptop.sh; workspace $browser_workspace output $monitor_two
+bindsym $mod+Ctrl+2 exec ~/.screenlayout/2DisBuero.sh
+bindsym $mod+Ctrl+3 exec ~/.screenlayout/3DisBuero.sh
+#bindsym $mod+Ctrl+4 exec ~/.screenlayout/MirrorHdmi.sh
+
+
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
@@ -102,7 +127,7 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# toggle sticky
+# toggle stickynext
 bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
@@ -116,22 +141,10 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 #navigate workspaces next / previous
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
+#bindsym $mod+Ctrl+Right workspace next
+#bindsym $mod+Ctrl+Left workspace prev
 
-# Workspace names
-# to display names or symbols instead of plain workspace numbers you can use
-# something like: set $ws1 1:mail
-#                 set $ws2 2:
 
-set $ws1 1:1:WWW
-set $ws2 2:2:IDE
-set $ws3 3:3:TERM
-set $ws4 4:4:VM|DLT
-set $ws5 5:5:MISC
-set $ws6 6:6:IRC|Musik
-set $ws7 7:7:mail
-set $ws8 8:8:pw
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -144,14 +157,14 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 
 # Move focused container to workspace
-bindsym $mod+Ctrl+1 move container to workspace $ws1
-bindsym $mod+Ctrl+2 move container to workspace $ws2
-bindsym $mod+Ctrl+3 move container to workspace $ws3
-bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace $ws5
-bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace $ws7
-bindsym $mod+Ctrl+8 move container to workspace $ws8
+#bindsym $mod+Ctrl+1 move container to workspace $ws1
+#bindsym $mod+Ctrl+2 move container to workspace $ws2
+#bindsym $mod+Ctrl+3 move container to workspace $ws3
+#bindsym $mod+Ctrl+4 move container to workspace $ws4
+#bindsym $mod+Ctrl+5 move container to workspace $ws5
+#bindsym $mod+Ctrl+6 move container to workspace $ws6
+#bindsym $mod+Ctrl+7 move container to workspace $ws7
+#bindsym $mod+Ctrl+8 move container to workspace $ws8
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
@@ -162,9 +175,6 @@ bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
-
-bindsym $mod+Ctrl+greater move workspace to output right
-bindsym $mod+Ctrl+less move workspace to output left
 
 # Open applications on specific workspaces
 
@@ -267,11 +277,10 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id blueman-applet
-exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_maia
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec --no-startup-id i3-msg 'workspace $ws5; exec terminal; exec terminal -e htop;'
-exec --no-startup-id firefox
+#exec --no-startup-id firefox
 exec --no-startup-id thunderbird
 exec --no-startup-id keepassxc
 #exec --no-startup-id quasselclient
