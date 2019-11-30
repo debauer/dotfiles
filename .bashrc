@@ -79,6 +79,7 @@ alias dotfiles='/usr/bin/git --git-dir=/home/bauer/.dotfiles/ --work-tree=/home/
 alias dot='dotfiles'
 alias dotac='dot add -u && dot commit -m '
 alias gitk="gitk --all"
+alias subl="subl3"
 
 
 # SSH Connections

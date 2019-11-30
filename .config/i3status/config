@@ -53,7 +53,7 @@ ethernet enp0s31f6 {
 
 battery all {
         # format = "%status %percentage %remaining %emptytime"
-        format = " %status %percentage %emptytime"
+        format = " %status %percentage %remaining"
         format_down = "No battery"
         last_full_capacity = true
         integer_battery_capacity = true
