@@ -234,12 +234,12 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-set $screensetting (1) Laptop (2) Laptop + 1 Screen TOP (3) Laptop + 2 Screen Top+Left
+set $screensetting (1) Laptop (2) Curved (3) Laptop + Curved
 bindsym $mod+Ctrl+s mode "$screensetting"
 mode "$screensetting" {
     bindsym 1 exec ~/.screenlayout/OnlyLaptop.sh, mode "default"
-    bindsym 2 exec ~/.screenlayout/2DisBuero.sh, mode "default"
-    bindsym 3 exec ~/.screenlayout/3DisBuero.sh, mode "default"
+    bindsym 2 exec ~/.screenlayout/OnlyCurved.sh, mode "default"
+    bindsym 3 exec ~/.screenlayout/2DisBuero.sh, mode "default"
     #bindsym 4 exec ~/.screenlayout/MirrorHdmi.sh, mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
