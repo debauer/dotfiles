@@ -75,20 +75,22 @@ alias grep='grep --color'
 alias pacman='pacman --color=auto'
 alias dmesg='dmesg -T --color'
 alias setenv='~/setEnv.sh'
-alias dotfiles='/usr/bin/git --git-dir=/home/bauer/.dotfiles/ --work-tree=/home/bauer'
+alias dotfiles='/usr/bin/git --git-dir=.dotfiles --work-tree=.'
 alias dot='dotfiles'
 alias dotac='dot add -u && dot commit -m '
 alias gitk="gitk --all"
 alias subl3="subl3 -a"
 alias subl="subl3 -a"
-
+alias yaoutSkipCheks='yaourt --m-arg "--skipchecksums --skippgpcheck'
 
 # SSH Connections
+alias ssh-extern-herbert='ssh root@debauer.selfhost.co -p 8022'
+alias ssh-home-herbert='ssh root@192.168.1.35'
 alias ssh-fablab-felix='ssh root@192.168.1.6'
 alias ssh-fablab-mail='ssh root@195.201.127.20'
 alias ssh-fablab-cloud='ssh root@cloud.fablab-karlsruhe.de'
 alias ssh-mail='ssh root@116.203.48.43'
-alias ssh-web='ssh root@116.203.48.50'
+alias ssh-web='ssh root@78.47.147.189'
 alias ssh-fablab-www='ssh root@www.fablab-karlsruhe.de'
 alias vdtproxy='cd ~/projects/rhmi-exchange-devbridge; nvm use v8; node proxy.js'
 
@@ -148,6 +150,3 @@ entpacken ()
 source /usr/share/nvm/init-nvm.sh
 
 xset -b #disable terminal beep
-
-# Forces npm to run as iobroker when inside the iobroker installation dir
-source ~/.iobroker/npm_command_fix

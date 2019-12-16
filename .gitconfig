@@ -13,3 +13,6 @@
 	
 [pager]
 	log = false
+
+[status]
+	relativePaths = true
