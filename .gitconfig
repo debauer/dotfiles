@@ -3,7 +3,7 @@
 	name = David Bauer
 
 [gui]
-	spellingdictionary = en_GB
+	spellingdictionary = none
 
 [alias]
 	cp = cherry-pick
