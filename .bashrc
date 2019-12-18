@@ -85,6 +85,8 @@ alias yaoutSkipCheks='yaourt --m-arg "--skipchecksums --skippgpcheck'
 
 # SSH Connections
 alias ssh-extern-herbert='ssh root@debauer.selfhost.co -p 8022'
+alias ssh-extern-herbert-with-ports='ssh -g -L43000:localhost:3000 root@debauer.selfhost.co -p 8022'
+  
 alias ssh-home-herbert='ssh root@192.168.1.35'
 alias ssh-fablab-felix='ssh root@192.168.1.6'
 alias ssh-fablab-mail='ssh root@195.201.127.20'
@@ -116,9 +118,6 @@ complete -cf sudo
 shopt -s checkwinsize
 
 shopt -s expand_aliases
-
-# export QT_SELECT=4
-
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
