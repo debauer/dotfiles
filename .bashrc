@@ -57,6 +57,7 @@ alias fgrep='fgrep --colour=auto'
 export LS_OPTIONS='--color=auto -h'
 export EDITOR='nano'
 export PATH="$PATH:/home/bauer/toolchain/flutter/bin"
+export PATH="$PATH:/home/bauer/bin"
 
 unset use_color safe_term match_lhs sh
 
@@ -82,6 +83,7 @@ alias gitk="gitk --all"
 alias subl3="subl3 -a"
 alias subl="subl3 -a"
 alias yaoutSkipCheks='yaourt --m-arg "--skipchecksums --skippgpcheck'
+alias set-git-github='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
 
 # SSH Connections
 alias ssh-extern-herbert='ssh root@debauer.selfhost.co -p 8022'
@@ -100,6 +102,7 @@ alias ssh-warden='ssh bauer@warden.synyx.net'
 alias ssh-vdt='ssh root@160.48.199.99'
 alias ssh-rack='ssh root@headunit-router.synyx.coffee -p 50022'
 alias ssh-koffer='ssh root@headunit-router.synyx.coffee -p 40022'
+
 
 
 alias showcores='watch -n.1 "cat /proc/cpuinfo | grep \"^[c]pu MHz\""'
@@ -149,3 +152,5 @@ entpacken ()
 source /usr/share/nvm/init-nvm.sh
 
 xset -b #disable terminal beep
+
+export CUDA_INSTALL_DIR=/opt/cuda-10.1
