@@ -68,7 +68,8 @@ alias DISPLAY_HDMI="HDMI1"
 
 alias cp="cp -i"                          # confirm before overwriting something
 alias lsh='ls -lah'
-alias df='df -h'                          # human-readable sizes
+alias df= 'df -h | grep -vwE "(overlay|shm|tmpfs)"' # df clean
+#alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
