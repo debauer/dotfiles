@@ -245,8 +245,7 @@ alias dotfiles='/usr/bin/git --git-dir=.dotfiles --work-tree=.'
 alias dot='dotfiles'
 alias dotac='dot add -u && dot commit -m '
 alias gitk="gitk --all"
-alias subl3="subl3 -a"
-alias subl="subl3 -a"
+alias subl="subl -a"
 alias yaoutSkipCheks='yaourt --m-arg "--skipchecksums --skippgpcheck'
 alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
 
