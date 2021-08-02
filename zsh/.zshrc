@@ -248,6 +248,8 @@ alias gitk="gitk --all"
 alias subl="subl -a"
 alias yaoutSkipCheks='yaourt --m-arg "--skipchecksums --skippgpcheck'
 alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
+alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
+
 
 function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
 function aplaybook() { ansible-playbook --vault-password-file .vault_pass -i hosts.yml "$@";}
