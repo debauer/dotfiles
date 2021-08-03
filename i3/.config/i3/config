@@ -51,14 +51,14 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
+
+
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86AudioMicMute exec ~/scripts/spotify_toggle_volume.sh
+
 exec --no-startup-id pasystray
-
-
-
-
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
