@@ -320,7 +320,7 @@ bar {
 #	tray_output primary
 #	tray_output eDP-1
 
-	bindsym button1 nop
+#	bindsym button1 nop
 	bindsym button4 nop
 	bindsym button5 nop
 #   font xft:URWGothic-Book 11
