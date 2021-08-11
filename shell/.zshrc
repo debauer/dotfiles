@@ -5,9 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source ~/gitstatus/gitstatus.plugin.sh
-#GITSTATUS_LOG_LEVEL=DEBUG
-
 # Use powerline
 USE_POWERLINE="true"
 
@@ -71,6 +68,52 @@ alias cp="cp -i"                                                # Confirm before
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
+alias ls='ls --color=auto'
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+alias lsh='ls -lah'
+alias np='nano -w PKGBUILD'
+alias more=less
+alias grep='grep --color'
+alias pacman='pacman --color=auto'
+alias dmesg='dmesg -T --color'
+alias gitk="gitk --all"
+alias subl="subl -a"
+alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
+alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
+alias set-github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
+
+
+## Function section 
+function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
+function aplaybook() { ansible-playbook --vault-password-file .vault_pass -i hosts.yml "$@";}
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
 
 # Theming section  
 autoload -U compinit colors zcalc
@@ -234,64 +277,6 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
       fi
     ;;
 esac
-
-alias ls='ls --color=auto'
-alias grep='grep --colour=auto'
-alias egrep='egrep --colour=auto'
-alias fgrep='fgrep --colour=auto'
-
-
-alias cp="cp -i"                          # confirm before overwriting something
-alias lsh='ls -lah'
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
-alias more=less
-alias grep='grep --color'
-alias pacman='pacman --color=auto'
-alias dmesg='dmesg -T --color'
-alias setenv='~/setEnv.sh'
-alias dotfiles='/usr/bin/git --git-dir=.dotfiles --work-tree=.'
-alias dot='dotfiles'
-alias dotac='dot add -u && dot commit -m '
-alias gitk="gitk --all"
-alias subl="subl -a"
-alias yaoutSkipCheks='yaourt --m-arg "--skipchecksums --skippgpcheck'
-alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
-alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
-
-
-function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
-function aplaybook() { ansible-playbook --vault-password-file .vault_pass -i hosts.yml "$@";}
-
-
-
-
-
-#
-# # ex - archive extractor
-# # usage: ex <file>
-ex ()
-{
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
