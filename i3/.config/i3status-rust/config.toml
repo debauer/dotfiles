@@ -27,6 +27,8 @@ hide_disconnected = true
 block = "battery"
 interval = 10
 format = "{percentage} {time}"
+driver = "upower"
+device= "DisplayDevice"
 
 [[block]]
 block = "memory"
