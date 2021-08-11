@@ -4,10 +4,11 @@
   paste = <Primary>v
 [profiles]
   [[default]]
-    background_darkness = 0.47
+    background_darkness = 0.44
     background_type = transparent
     cursor_color = "#aaaaaa"
     foreground_color = "#f6f5f4"
+    show_titlebar = False
     scrollback_lines = 10000
     scrollback_infinite = True
     disable_mousewheel_zoom = True
