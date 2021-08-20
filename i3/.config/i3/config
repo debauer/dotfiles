@@ -313,17 +313,16 @@ bar {
 	i3bar_command i3bar
 	status_command i3status-rs
 	position top
-	height 25
 
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
-#	tray_output eDP-1
+#	output eDP-1
 
 #	bindsym button1 nop
 	bindsym button4 nop
 	bindsym button5 nop
-#   font xft:URWGothic-Book 11
+	font pango:DejaVu Sans Mono, FontAwesome 11
 	strip_workspace_numbers yes
 
     colors {
