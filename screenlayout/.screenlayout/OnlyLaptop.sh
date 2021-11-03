@@ -1,6 +1,2 @@
 #!/bin/sh
-INTERN="--output eDP1 --mode 1920x1080 --pos 1920x1080"
-EXTERN1="--output DP2-2 --off"
-EXTERN2="--output DP2-3 --off"
-EXTERN3="--output HDMI2 --off"
-xrandr $INTERN $EXTERN1 $EXTERN2 $EXTERN3
+xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x1440 --rotate normal --output DP-1 --off --output DP-2 --off --output HDMI-1 --off --output DP-1-1 --off --output DP-1-2 --off --output DP-1-3 --off
