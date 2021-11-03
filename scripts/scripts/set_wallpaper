@@ -1,0 +1,3 @@
+nitrogen --head=1 --set-scaled /home/debauer/Bilder/Wallpaper/wallpaperflare.com_wallpaper.jpg
+nitrogen --head=2 --set-scaled /home/debauer/Bilder/Wallpaper/wallpaperflare.com_wallpaper.jpg
+nitrogen --head=0 --set-scaled /home/debauer/Bilder/Wallpaper/wallpaperflare.com_wallpaper.jpg

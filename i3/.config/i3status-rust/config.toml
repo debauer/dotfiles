@@ -1,8 +1,14 @@
-theme = "nord-dark"
-icons = "awesome"
+[theme]
+name = "nord-dark"
+[theme.overrides]
+separator = ""
+#separator = "\ue0b2"
+separator_bg = "#ff0000"
+separator_fg = "auto"
 
-[[block]]
-block = "sound"
+[icons]
+name = "awesome"
+
 
 [[block]]
 block = "music"
@@ -24,16 +30,29 @@ format_unavailable = ""
 hide_disconnected = true
 
 [[block]]
+block = "sound"
+
+[[block]]
 block = "battery"
 interval = 10
 format = "{percentage} {time}"
+full_format = "{percentage} " 
 driver = "upower"
 device= "DisplayDevice"
+
+
+[[block]]
+block = "networkmanager"
+on_click = "alacritty -e nmtui"
+interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+", "tun[0-9]+"]
+interface_name_include = []
+ap_format = "{ssid^10}"
+#device_format = "{ap} {ips}"
 
 [[block]]
 block = "memory"
 display_type = "memory"
-format_mem = "{mem_total_used_percents}"
+format_mem = "{mem_used_percents}"
 format_swap = "{swap_used_percents}"
 
 [[block]]
@@ -45,15 +64,7 @@ block = "load"
 interval = 1
 format = "{1m}"
 
-
-[[block]]
-block = "networkmanager"
-on_click = "alacritty -e nmtui"
-interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
-interface_name_include = []
-ap_format = "{ssid^10}"
-
 [[block]]
 block = "time"
 interval = 60
-format = "%a %d/%m %R"
+format = "%F %R"
