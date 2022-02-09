@@ -8,6 +8,8 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
+export PATH=$PATH:~/.platformio/penv/bin:/opt/cuda-11.1/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda-11.1/lib64
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/debauer/.oh-my-zsh"
@@ -168,7 +170,7 @@ alias subl="subl -a"
 alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
 alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
 alias set-github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
-
+alias killcods="sudo kill -9 $(pgrep -f 'cods|CODS')"
 
 ## Function section 
 function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
