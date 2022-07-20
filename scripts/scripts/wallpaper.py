@@ -3,6 +3,8 @@ import subprocess
 from argparse import ArgumentParser
 from pathlib import Path
 
+from helper.process import command_silent
+
 
 def monitor_count():
     count = 0
@@ -33,8 +35,7 @@ wallpaper = parser.parse_args().wallpaper
 print("run commands:")
 for x in range(monitor_count()):
     command = f"nitrogen --head={x} --set-scaled {wallpaper_folder.joinpath(wallpaper + '.jpg')}"
-    print("  " + command)
-    subprocess.Popen(args=command, shell=True)
+    command_silent(command, verbose=True)
 print("done")
 
 # nitrogen --head=2 --set-scaled /home/debauer/Bilder/Wallpaper/wallpaperflare.com_wallpaper.jpg

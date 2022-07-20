@@ -1,1 +1,4 @@
 pulsectl
+keyboard
+clipboard
+myjdapi

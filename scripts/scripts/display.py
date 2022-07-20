@@ -3,85 +3,39 @@ import subprocess
 from argparse import ArgumentParser
 from time import sleep
 
-def display_list():
-    monitor = []
-    process = subprocess.run(
-        ["xrandr"], shell=True, text=True, stdout=subprocess.PIPE, timeout=2
-    )
-    for line in process.stdout.split("\n"):
-        if " connected " in line or " disconnected " in line:
-            monitor.append(line.split()[0])
-    monitor.sort()
-    print("found displays:", monitor)
-    return monitor
+from helper.notify import notify
+from helper.xrandr_command import XrandrCommand
+
+command = XrandrCommand(primary="eDP-1")
+
+command.set_monitors({
+    "laptop": ("eDP-1", "1920x1080", "760x1569", "normal"),
+    "asus": ("DP-2-3", "2560x1440", "3440x0", "right"),
+    "lg": ("DP-1", "3440x1440", "0x129", "normal"),
+    "thinkvision": ("DP-1", "1920x1080", "2680x1569", "normal")
+})
+
+command.set_setups({
+    "workspace": ["laptop", "asus", "lg"],
+    "thinkvision": ["laptop", "thinkvision"],
+    "laptop": ["laptop"],
+})
     
-def edid():
-    monitor = []
-    process = subprocess.run(
-        ["sudo find /sys |grep -i edid | grep 'sys/devices'"], shell=True, text=True, stdout=subprocess.PIPE, timeout=2
-    )
-    for line in process.stdout.split("\n"):
-        s = line.split("/")
-        if len(s) >= 8:
-            monitor.append(s[7][6:])
-    monitor.sort()
-    print("found edids:", monitor)
-    #subprocess.getoutput("xrandr")
-    #pyedid.parse_edid(edid_bytes)
-
-primary_monitor = "eDP-1"
-
-monitors = {
-    "laptop": ("eDP-1", "1920x1080", "1920x1440"),
-    "Asus calibrated": ("DP-2-3", "2560x1440", "1466x0"),
-    "thinkvision": ("DP-1", "1920x1080", "2240x1440" )
-}
-
-monitor_setups = {
-    "home-3": ["laptop", "Asus calibrated", "thinkvision"],
-    "home-2-small": ["laptop", "thinkvision"],
-    "home-2-big": ["laptop", "Asus calibrated"],
-    "home-1": ["laptop"],
-}
-
-
-
-def disable(display):
-    return f" --output {display} --off "
-
-def enable(display, mode, pos):
-    primary = ""
-    if display == primary_monitor:
-        primary = "--primary"
-    return f"--output {display} {primary} --mode {mode} --pos {pos} "
-
-def build_command(enable_monitors: list):
-    print("enable: ", enable_monitors)
-    monitor_setup = []
-    for mon in enable_monitors:
-        monitor_setup.append(monitors[mon])
-    print("monitor_setups:", monitor_setup)
-    command = "xrandr "
-    displays = display_list()
-    for display in displays:
-        for setup in monitor_setup:
-            if display == setup[0]:
-                command +=  enable(*(setup))
-                continue
-        command += disable(display)
-    print(command)        
-    
-print()
 parser = ArgumentParser(description="System to record the data on a trimodal crane")
 
 parser.add_argument("--reset", help="reset", action='store_const', const="reset")
-parser.add_argument("setup", type=str, help="setup", choices=monitor_setups)
+parser.add_argument("setup", type=str, help="setup", choices=command.setups)
 
 args = parser.parse_args()
 setup = args.setup
 reset = args.reset
 
+
 if reset:
-    build_command(["home-1"])
+    command.build("home-1")
+    command.run()
     sleep(2)
-build_command(monitor_setups[setup])
+command.build(setup)
+command.run()
+notify("sound.py", 1337, f"changed displays to setup: {setup}")
+print("DONE")

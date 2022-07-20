@@ -3,24 +3,22 @@
 import subprocess
 from argparse import ArgumentParser
 
+from helper.process import command_print
+
 mac = {"boxen": "E9:08:EF:8B:66:6C", "headset": "28:11:A5:48:88:B4"}
 
+def parse():
+    parser = ArgumentParser(description="System to record the data on a trimodal crane")
+    parser.add_argument("device", type=str, help="device", choices=mac.keys())
+    return parser.parse_args().device
 
-parser = ArgumentParser(description="System to record the data on a trimodal crane")
+def connect(device):
+    try:
+        command_print(f"bluetoothctl connect {mac[device]}")
+    except subprocess.TimeoutExpired:
+        print("connection failed [timeout]")
+        
 
-parser.add_argument("device", type=str, help="device", choices=mac.keys())
-
-device = parser.parse_args().device
-try:
-    connect = subprocess.run(
-        ["bluetoothctl", "connect", mac[device]],
-        text=True,
-        stdout=subprocess.PIPE,
-        check=True,
-        timeout=2,
-    )
-    for line in connect.stdout.split("\n"):
-        print(line)
-except subprocess.TimeoutExpired:
-    print("connection failed [timeout]")
+if __name__ == "__main__":
+    connect(parse())
     exit()
