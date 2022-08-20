@@ -10,7 +10,10 @@ sources = ["Flatbed", "ADF"]
 resolution = [75, 100, 150, 200, 300]
 
 imagename = datetime.now().isoformat()
-device = "airscan:w1:Samsung Electronics Co., Ltd. M2070 Series"
+devices = {
+    "home": "airscan:w1:Samsung Electronics Co., Ltd. M2070 Series",
+    "hoelle": "airscan:w0:Brother MFC-J6720DW"
+}
     
 def parse_args():
     parser = ArgumentParser(description="scan image")
@@ -21,11 +24,13 @@ def parse_args():
     parser.add_argument("--contrast", type=int, help="contrast -100..100% (in steps of 1)", default=0)
     parser.add_argument("--name", type=str, help="name of file", default=imagename)
     parser.add_argument("--batch", help="reset", action='store_const', const="reset")
+    parser.add_argument("--scanner", type=str, help="scanner", default="home", choices=devices.keys())
 
     return parser.parse_args()
 
 def build_command(args):
     batch = args.batch
+    device = devices[args.scanner]
     cmd = f'scanimage -d "{device}" -p -v '
     cmd += f" --source {args.source}"
     cmd += f" --brightness {args.brightness}"
