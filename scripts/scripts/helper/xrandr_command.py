@@ -20,11 +20,11 @@ class XrandrCommand():
     def disable(self, display):
         return f" --output {display} --off "
     
-    def enable(self, display, mode, pos):
+    def enable(self, display, mode, pos, rotate):
         primary = ""
         if display == self.primary:
             primary = "--primary"
-        return f"--output {display} {primary} --mode {mode} --pos {pos} "
+        return f"--output {display} {primary} --mode {mode} --pos {pos} --rotate {rotate}"
     
     def build(self, setup_name: str) -> str:
         print("enable: ", setup_name)
@@ -36,7 +36,8 @@ class XrandrCommand():
         for display in self.displays:
             for setup in monitor_setup:
                 if display == setup[0]:
-                    command += self.enable(*(setup))
+                    print(*setup)
+                    command += self.enable(*setup)
                     continue
             command += self.disable(display)
         self.command = command
