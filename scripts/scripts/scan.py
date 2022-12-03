@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import subprocess
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 from datetime import datetime
 from time import sleep
 
@@ -14,13 +14,15 @@ devices = {
     "home": "airscan:w1:Samsung Electronics Co., Ltd. M2070 Series",
     "hoelle": "airscan:w0:Brother MFC-J6720DW"
 }
-    
-def parse_args():
+
+
+def parse_args() -> Namespace:
     parser = ArgumentParser(description="scan image")
-    
+
     parser.add_argument("--source", type=str, help="Flatbed or ADF", choices=sources, default="Flatbed")
     parser.add_argument("--dpi", type=int, help="DPI", choices=resolution, default=300)
-    parser.add_argument("--brightness", type=int, help="brightness -100..100% (in steps of 1)", choices=resolution, default=0)
+    parser.add_argument("--brightness", type=int, help="brightness -100..100% (in steps of 1)",
+                        default=0)
     parser.add_argument("--contrast", type=int, help="contrast -100..100% (in steps of 1)", default=0)
     parser.add_argument("--name", type=str, help="name of file", default=imagename)
     parser.add_argument("--batch", help="reset", action='store_const', const="reset")
@@ -28,21 +30,6 @@ def parse_args():
 
     return parser.parse_args()
 
-def build_command(args):
-    batch = args.batch
-    device = devices[args.scanner]
-    cmd = f'scanimage -d "{device}" -p -v '
-    cmd += f" --source {args.source}"
-    cmd += f" --brightness {args.brightness}"
-    cmd += f" --contrast {args.contrast}"
-    cmd += f" --resolution {args.dpi}"
-    if batch:
-        batch += " --batch=batch%d.jpg"
-        if args.source == "Flatbed":
-            batch += " --batch-prompt "
-    else:
-        cmd += f" -o {args.name}.jpeg"
-    return cmd
 
 def build_dokument():
     tempname = imagename
@@ -52,8 +39,39 @@ def build_dokument():
     command_print(cmd, timeout=None)
 
 
-args = parse_args()
+def scan(
+        name: str,
+        device: str = "home",
+        source: str = "Flatbed",
+        brightness: int = 0,
+        contrast: int = 0,
+        dpi: int = 300,
+        batch: bool = False) -> None:
+    device = devices[device]
+    cmd = f'scanimage -d "{device}" -p -v '
+    cmd += f" --source {source}"
+    cmd += f" --brightness {brightness}"
+    cmd += f" --contrast {contrast}"
+    cmd += f" --resolution {dpi}"
+    if batch:
+        batch += " --batch=batch%d.jpg"
+        if source == "Flatbed":
+            batch += " --batch-prompt "
+    else:
+        cmd += f" -o {name}.jpeg"
+    command_print(cmd, timeout=None)
+    if batch:
+        build_dokument()
 
-command_print(build_command(args), timeout=None)
-if args.batch:
-    build_dokument()
+
+if __name__ == "__main__":
+    args = parse_args()
+    scan(
+        name=args.name,
+        device=args.scanner,
+        source=args.source,
+        brightness=args.brightness,
+        contrast=args.contrast,
+        dpi=args.dpi,
+        batch=args.batch,
+    )

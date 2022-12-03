@@ -10,7 +10,7 @@ def command_silent(command: str, verbose: bool = False):
     subprocess.Popen(args=command, shell=True)
     
     
-def command_print(command: str, timeout: int = 2, verbose: bool = False) -> str:
+def command_print(command: str, timeout: float | None = 2.0, verbose: bool = False) -> str:
     if verbose:
         print(command)
         print(shlex.split(command))
