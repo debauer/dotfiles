@@ -8,6 +8,12 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/go/bin:$PATH
+export PATH="$HOME/rust/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin:$PATH"
+
+export OATH=$HOME/.dotnet/tools:$PATH
+export PATH=$PATH:~/.platformio/penv/bin:/opt/cuda-11.1/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda-11.1/lib64
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/debauer/.oh-my-zsh"
@@ -168,7 +174,7 @@ alias subl="subl -a"
 alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
 alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
 alias set-github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
-
+alias killcods="sudo kill -9 $(pgrep -f 'cods|CODS')"
 
 ## Function section 
 function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
@@ -205,6 +211,17 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+function gi {                                                                                                                                                                                                                                   
+    x="$@"                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                
+    if [[ $1 == t* ]] || [[ $1 == "status" ]] ; then                                                                                                                                                                                            
+        echo -e "Probably mistyped 'git' again, executing:\n\ngit ${1:1} ${@:2}\n"            
+        git ${1:1} ${@:2}                                                                                                                                                                                                                                                                                                                                                                                
+    else                                                                                                                                                                                                                                        
+        curl -L -s "https://www.gitignore.io/api/${x// /,}"                                                                                                                                                                                     
+    fi                                                                                                                                                                                                                                          
+}   
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

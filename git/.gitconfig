@@ -16,3 +16,6 @@
 
 [status]
 	relativePaths = true
+
+[core]
+	excludesFile = ~/.gitignore

@@ -1,0 +1,21 @@
+[Unit]
+Description=clipboard_log
+After=graphical.target
+
+[Service]
+Environment="PATH=/usr/bin"
+Type=Application
+WorkingDirectory=/home/debauer
+ExecStart=python3 /home/debauer/scripts/clipboard_log.py
+Environment=PYTHONUNBUFFERED=1
+User=debauer
+Group=debauer
+
+SyslogIdentifier=clipboard_log
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
