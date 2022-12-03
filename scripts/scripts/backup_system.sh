@@ -18,7 +18,9 @@ if [ "$?" -eq 1 ] ; then
 else
     echo $LINE
     echo "BACKUP: start rsync"
-    sudo rsync -aAXh -v --stats --progress --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","*/.cache"} "${SOURCE}" "${TARGET_MNT}/${TARGET_FOLDER}/${TODAY}" > /tmp/backup_log
+    SUB_FOLDER=home
+    sudo rsync -aAXh -v --stats --progress --exclude={"*/.cache", "*/.local"} "${SOURCE}/${SUB_FOLDER}" "${TARGET_MNT}/${TARGET_FOLDER}/${TODAY}/" > /tmp/backup_log_${SUB_FOLDER}
+    #sudo rsync -aAXh -v --stats --progress --exclude={"/usr/*","/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","*/.cache"} "${SOURCE}" "${TARGET_MNT}/${TARGET_FOLDER}/${TODAY}" > /tmp/backup_log
     if [ "$?" -eq 1 ] ; then
         telegram_print_line "BACKUP: RSYNC Failed"
         telegram_seperator

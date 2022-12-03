@@ -155,3 +155,4 @@ source /usr/share/nvm/init-nvm.sh
 xset -b #disable terminal beep
 
 export CUDA_INSTALL_DIR=/opt/cuda-10.1
+. "$HOME/.cargo/env"
