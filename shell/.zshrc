@@ -5,6 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+HONDA_WORKDIR="$HOME/projects/honda"
+HONDA_ENVFILE="$HONDA_WORKDIR/hri-tools/shell/honda.env"
+_HONDA_LOADER="$HONDA_WORKDIR/hri-tools/shell/zshrc.honda"
+test -f "$_HONDA_LOADER" && source $HOME/projects/honda/hri-tools/shell/zshrc.honda
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
