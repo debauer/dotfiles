@@ -13,6 +13,7 @@ test -f "$_HONDA_LOADER" && source $HOME/projects/honda/hri-tools/shell/zshrc.ho
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/projects/honda/hri-tools:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH="$HOME/rust/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin:$PATH"
 
@@ -21,7 +22,7 @@ export PATH=$PATH:~/.platformio/penv/bin:/opt/cuda-11.1/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda-11.1/lib64
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/debauer/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -180,6 +181,8 @@ alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
 alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
 alias set-github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
 alias killcods="sudo kill -9 $(pgrep -f 'cods|CODS')"
+alias honda_socks_proxy="docker run -d -it -v $HOME/projects/honda/socks-to-http-proxy/urls:/urls --network=host s2h --listen 0.0.0.0:6969 --socks5 127.0.0.1:1080 --filename /urls/honda.txt"
+
 
 ## Function section 
 function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
