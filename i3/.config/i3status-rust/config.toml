@@ -15,19 +15,19 @@ block = "music"
 #player = "spotify"
 buttons = ["play", "next"]
 
-[[block]]
-block = "bluetooth"
-mac = "E9:08:EF:8B:66:6C"
-format = "Boxen"
-format_unavailable = ""
-hide_disconnected = true
+#[[block]]
+#block = "bluetooth"
+#mac = "E9:08:EF:8B:66:6C"
+#format = "Boxen"
+#format_unavailable = ""
+#hide_disconnected = true
 
-[[block]]
-block = "bluetooth"
-mac = "28:11:A5:48:88:B4"
-format = "Bose"
-format_unavailable = ""
-hide_disconnected = true
+#[[block]]
+#block = "bluetooth"
+#mac = "28:11:A5:48:88:B4"
+#format = "Bose"
+#format_unavailable = ""
+#hide_disconnected = true
 
 [[block]]
 block = "sound"
