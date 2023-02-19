@@ -5,8 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+source $HOME/.profile
+
+
 export HONDA_WORKDIR="$HOME/projects/honda"
-export HONDA_DEFAULT_CONTAINER_RUNTIME="docker"
+export HONDA_DEFAULT_CONTAINER_RUNTIME="podman"
 export REGISTRY_AUTH_FILE=$HOME/.config/podman/auth.json
 HONDA_ENVFILE="$HONDA_WORKDIR/hri-tools/shell/honda.env"
 _HONDA_LOADER="$HONDA_WORKDIR/hri-tools/shell/zshrc.honda"
@@ -17,6 +20,7 @@ test -f "$_HONDA_LOADER" && source $HOME/projects/honda/hri-tools/shell/zshrc.ho
 export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/projects/honda/hri-tools:$PATH
 export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/rust/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin:$PATH"
 
 export OATH=$HOME/.dotnet/tools:$PATH

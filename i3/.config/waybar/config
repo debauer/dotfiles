@@ -89,6 +89,9 @@
 		"on-click": "pamixer -t",
 		"on-click-right": "pavucontrol"
 	},
+	"mpd": {
+		"server": "localhost"
+	},
 	"memory": {
 		"interval": 5,
 		"format": "Mem {}%"

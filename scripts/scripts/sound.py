@@ -68,9 +68,12 @@ def available_clients() -> List[PulseClientInfo]:
 my_sinks = {
     "internal": "Internes Audio Analog Stereo",
     "boxen": "AUKEY BR-C1",
-    "bayer": "USB HIFI Audio Analog Stereo",
+    "bayer": "USB HIFI Audio",
     "bose": "Bose David"
 }
+
+def menue_item():
+    return my_sinks
 
 def parse():
     parser = ArgumentParser(description="System to record the data on a trimodal crane")
@@ -79,7 +82,7 @@ def parse():
     return parser.parse_args()
 
 
-def switch():
+def switch(device, verbose):
     if verbose:
         print(pulse.sink_input_list())
     sink = find_sink(my_sinks[device])
@@ -103,7 +106,7 @@ if __name__ == "__main__":
     args = parse()
     verbose = args.verbose
     device = args.device
-    switch()
-    notify("sound.py", "1337", f"changed sink to: {device}")
+    switch(device, verbose)
+    #notify("sound.py", "1337", f"changed sink to: {device}")
     exit()
     

@@ -1,69 +1,58 @@
-
 set $mod Mod4
 set $term alacritty
 
+input type:keyboard xkb_capslock disabled
+input type:keyboard xkb_numlock disabled
 
 default_border none
 default_floating_border none
 hide_edge_borders none
 
+font xft:URWGothic-Book 10
+font pango:DejaVu Sans Mono 10
+floating_modifier $mod
+
+set $ws1 1:1:FIREFOX
+set $ws2 2:2:IDE
+set $ws3 3:3:CHROME
+set $ws4 4:4:OBS
+set $ws5 5:5:TERM
+set $ws6 6:6:HONDA
+set $ws7 7:7:MESSANGER
+set $ws8 8:8:MEDIA
+
+
 bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
-
-font xft:URWGothic-Book 10
-font pango:DejaVu Sans Mono 10
-
-floating_modifier $mod
 
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-set $menu exec $term --class=launcher -e sway-launcher-desktop
-bindsym $mod+d exec $menu
+set $launcher exec $term --class=launcher -e sway-launcher-desktop
+bindsym $mod+d exec $launcher
+
+for_window [app_id="^menue$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
+set $menu exec $term --class=menue -e menue.py
+bindsym $mod+m exec $menu
 
 
-####exec --no-startup-id volumeicon
-####bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id pa-applet
-bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Print exec sway-interactive-screenshot
 
 bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume 0 -5%
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioMicMute exec ~/scripts/spotify_toggle_volume.sh
 
-exec --no-startup-id pasystray
 
-# Workspace names
-# to display names or symbols instead of plain workspace numbers you can use
-# something like: set $ws1 1:mail
-#                 set $ws2 2:
-
-set $ws1 1:1:FIRE
-set $ws2 2:2:IDE
-set $ws3 3:3:CHROME
-set $ws4 4:4:TERM
-set $ws5 5:5:TERM
-set $ws6 6:6:MATRIX
-set $ws7 7:7:MAIL
-set $ws8 8:8:SPOT
-
-# Start Applications
-
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+f3 exec nautilus
-# focus_follows_mouse no
 
-# change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -73,6 +62,10 @@ bindsym $mod+Ctrl+Right move workspace to output right
 bindsym $mod+Ctrl+Left move workspace to output left
 bindsym $mod+Ctrl+Up move workspace to output up
 bindsym $mod+Ctrl+Down move workspace to output down
+
+bindsym $mod+Ctrl+o exec swaymsg "output * dpms off"
+bindsym $mod+Ctrl+p exec swaymsg "output * dpms on"
+
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
@@ -104,16 +97,20 @@ bindsym $mod+Shift+s sticky toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# move the currently focused window to the scratchpad
-#bindsym $mod+Shift+minus move scratchpad
+# custom Keyboard
 
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-#bindsym $mod+minus scratchpad show
-
-#navigate workspaces next / previous
-#bindsym $mod+Ctrl+Right workspace next
-#bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+f1 exec --no-startup-id notify-send 1
+bindsym $mod+Ctrl+f2 exec --no-startup-id notify-send 2
+bindsym $mod+Ctrl+f3 exec --no-startup-id notify-send 3
+bindsym $mod+Ctrl+f4 exec --no-startup-id notify-send 4
+bindsym $mod+Ctrl+f5 exec --no-startup-id notify-send 5
+bindsym $mod+Ctrl+f6 exec --no-startup-id notify-send 6
+bindsym $mod+Ctrl+f7 exec --no-startup-id notify-send 7
+bindsym $mod+Ctrl+f8 exec --no-startup-id notify-send 8
+bindsym $mod+Ctrl+f9 exec --no-startup-id notify-send 9
+bindsym $mod+Ctrl+f10 exec --no-startup-id notify-send a
+bindsym $mod+Ctrl+f11 exec --no-startup-id notify-send b
+bindsym $mod+Ctrl+f12 exec --no-startup-id notify-send c
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -237,8 +234,8 @@ exec --no-startup-id nitrogen --restore; sleep 1; compton -b # background!
 exec_always --no-startup-id killall nm-applet; sleep1; nm-applet --indicator
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
 exec --no-startup-id blueman-applet
+exec_always --no-startup-id killall mako; sleep1; mako --config .config/mako/mako.conf
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -262,7 +259,7 @@ bar {
 
 
 # hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+# bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
@@ -331,5 +328,11 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-exec --no-startup-id swaymsg create_output
-exec --no-startup-id swaymsg -t output HEADLESS-1 pos 1920 0 mode 600 600
+exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+exec_always --no-startup-id swaymsg output eDP-1      pos 2720 490 mode 1920 1200
+exec_always --no-startup-id swaymsg output DP-1       pos 4640 250 mode 3440 1440
+exec_always --no-startup-id swaymsg output HDMI-A-1   pos 8080 0 mode 2560 1440 transform 90
+exec_always --no-startup-id swaymsg output DP-2       pos 5380 1690 mode 1920 1080
+exec_always --no-startup-id swaymsg output "*" background /home/debauer/Bilder/Wallpaper/girlnight.jpg fill

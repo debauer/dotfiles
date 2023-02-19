@@ -21,9 +21,8 @@ def parse_args() -> Namespace:
 
     parser.add_argument("--source", type=str, help="Flatbed or ADF", choices=sources, default="Flatbed")
     parser.add_argument("--dpi", type=int, help="DPI", choices=resolution, default=300)
-    parser.add_argument("--brightness", type=int, help="brightness -100..100% (in steps of 1)",
-                        default=0)
-    parser.add_argument("--contrast", type=int, help="contrast -100..100% (in steps of 1)", default=0)
+    parser.add_argument("--brightness", type=int, help="brightness -100..100 in steps of 1",default=0)
+    parser.add_argument("--contrast", type=int, help="contrast -100..100 in steps of 1", default=0)
     parser.add_argument("--name", type=str, help="name of file", default=imagename)
     parser.add_argument("--batch", help="reset", action='store_const', const="reset")
     parser.add_argument("--scanner", type=str, help="scanner", default="home", choices=devices.keys())
