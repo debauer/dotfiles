@@ -237,8 +237,8 @@
 #def_key "right"
 #  volume_up
 #
-#def_key "+"
-#  volume_up
+def_key "+"
+  volume_up
 #
 #def_key "left"
 #  previous_column
@@ -297,8 +297,8 @@
 #def_key "8"
 #  show_visualizer
 #
-#def_key "="
-#  show_clock
+def_key "="
+  volume_up
 #
 #def_key "@"
 #  show_server_info
