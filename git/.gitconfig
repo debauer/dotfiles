@@ -28,3 +28,6 @@
 	required = true
 [protocol "file"]
 	allow = always
+
+[includeIf "gitdir:~/projects/honda"]
+    path = ~/projects/honda/hir-tools/git_config

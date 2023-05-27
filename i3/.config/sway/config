@@ -234,9 +234,9 @@ exec_always --no-startup-id killall nm-applet; sleep1; nm-applet --indicator
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id blueman-applet
-exec_always --no-startup-id killall mako; sleep1; mako --config .config/mako/mako.conf
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+exec --no-startup-id killall mako; sleep1; mako --config .config/mako/mako.conf
+exec --no-startup-id ff-theme-util
+exec --no-startup-id fix_xcursor
 
 
 
