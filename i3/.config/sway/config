@@ -8,6 +8,9 @@ default_border none
 default_floating_border none
 hide_edge_borders none
 
+
+#font xft:URWGothic-Book 10
+#font pango:DejaVu Sans Mono 10
 font xft:URWGothic-Book 10
 font pango:DejaVu Sans Mono 10
 floating_modifier $mod
@@ -15,9 +18,9 @@ floating_modifier $mod
 set $ws1 1:1:FIREFOX
 set $ws2 2:2:IDE
 set $ws3 3:3:CHROME
-set $ws4 4:4:OBS
+set $ws4 4:4:TERM
 set $ws5 5:5:TERM
-set $ws6 6:6:HONDA
+set $ws6 6:6:TERM
 set $ws7 7:7:MESSANGER
 set $ws8 8:8:MEDIA
 
@@ -26,7 +29,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10

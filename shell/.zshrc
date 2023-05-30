@@ -25,8 +25,10 @@ export PATH=$HOME/scripts:$PATH
 
 export PATH=$HOME/projects/honda/hri-tools:$PATH
 export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/rust/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin:$PATH"
+
 
 export OATH=$HOME/.dotnet/tools:$PATH
 export PATH=$PATH:~/.platformio/penv/bin:/opt/cuda-11.1/bin

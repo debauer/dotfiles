@@ -3,7 +3,8 @@ export PATH=$PATH:~/.platformio/penv/bin
 
 # Added by Toolbox App
 export PATH="$PATH:/home/debauer/.local/share/JetBrains/Toolbox/scripts"
-#. "$HOME/.cargo/env"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 export BEMENU_BACKEND=wayland
 export CLUTTER_BACKEND=wayland
