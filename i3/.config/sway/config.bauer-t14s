@@ -1,0 +1,5 @@
+exec_always --no-startup-id swaymsg output "Chimei Innolux Corporation 0x14F2 0x00000000"      pos 2720 490 mode 1920 1200
+exec_always --no-startup-id swaymsg output "Goldstar Company Ltd LG ULTRAWIDE 108NTMX8E219"       pos 4640 250 mode 3440 1440
+exec_always --no-startup-id swaymsg output "Unknown PA278QV L8LMQS118493"        pos 8080 0 mode 2560 1440 transform 90
+exec_always --no-startup-id swaymsg output "Lenovo Group Limited M14 V907GCGW"   pos 5300 1690 mode 1920 1080
+#

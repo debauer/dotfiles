@@ -8,16 +8,16 @@ default_border none
 default_floating_border none
 hide_edge_borders none
 
-font xft:URWGothic-Book 10
-font pango:DejaVu Sans Mono 10
+#font xft:URWGothic-Book 10
+#font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 set $ws1 1:1:FIREFOX
 set $ws2 2:2:IDE
 set $ws3 3:3:CHROME
-set $ws4 4:4:OBS
+set $ws4 4:4:TERM
 set $ws5 5:5:TERM
-set $ws6 6:6:HONDA
+set $ws6 6:6:TERM
 set $ws7 7:7:MESSANGER
 set $ws8 8:8:MEDIA
 
@@ -26,7 +26,7 @@ bindsym $mod+u border none
 bindsym $mod+y border pixel 1
 bindsym $mod+n border normal
 
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
@@ -180,10 +180,10 @@ for_window [class="Tilda"] floating enable
 for_window [urgent=latest] focus
 
 # reload the configuration file
-bindsym $mod+Shift+c swaymsg reload
+bindsym $mod+Shift+c exec swaymsg reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r swaymsg restart
+bindsym $mod+Shift+r exec swaymsg restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -331,8 +331,7 @@ mode "$mode_gaps_outer" {
 exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-exec_always --no-startup-id swaymsg output eDP-1      pos 2720 490 mode 1920 1200
-exec_always --no-startup-id swaymsg output DP-1       pos 4640 250 mode 3440 1440
-exec_always --no-startup-id swaymsg output HDMI-A-1   pos 8080 0 mode 2560 1440 transform 90
-exec_always --no-startup-id swaymsg output DP-2       pos 5380 1690 mode 1920 1080
+include "~/.config/sway/config.`hostnamectl hostname`"
+
+#exec_always --no-startup-id swaymsg output DP-2       pos 5380 1690 mode 1920 1080
 exec_always --no-startup-id swaymsg output "*" background /home/debauer/Bilder/Wallpaper/girlnight.jpg fill

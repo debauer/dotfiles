@@ -56,8 +56,8 @@ alias fgrep='fgrep --colour=auto'
 
 export LS_OPTIONS='--color=auto -h'
 export EDITOR='nano'
-export PATH="$PATH:/home/bauer/toolchain/flutter/bin"
-export PATH="$PATH:/home/bauer/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 unset use_color safe_term match_lhs sh
 

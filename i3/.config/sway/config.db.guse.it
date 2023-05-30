@@ -1,0 +1,4 @@
+exec_always --no-startup-id swaymsg output eDP-1    pos 2720 1200 mode 1920 1200                 # "Chimei Innolux Corporation 0x14F2 0x00000000"
+exec_always --no-startup-id swaymsg output DP-3     pos 4640 250 mode 3440 1440                 # "Goldstar Company Ltd LG ULTRAWIDE 108NTMX8E219"
+# exec_always --no-startup-id swaymsg output DP-5   pos 8080 0 mode 2560 1440 transform 90      # "Unknown PA278QV L8LMQS118493"
+exec_always --no-startup-id swaymsg output DP-2     pos 5300 1690 mode 1920 1080                # "Lenovo Group Limited M14 V907GCGW"
