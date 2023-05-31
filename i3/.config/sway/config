@@ -330,8 +330,11 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+
 exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+include "~/.config/sway/config.`hostnamectl hostname`"
 
 exec_always --no-startup-id swaymsg output eDP-1      pos 2720 490 mode 1920 1200
 exec_always --no-startup-id swaymsg output DP-1       pos 4640 250 mode 3440 1440
