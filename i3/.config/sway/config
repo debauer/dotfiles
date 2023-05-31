@@ -328,10 +328,7 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
 include "~/.config/sway/config.`hostnamectl hostname`"
 
 #exec_always --no-startup-id swaymsg output DP-2       pos 5380 1690 mode 1920 1080
-exec_always --no-startup-id swaymsg output "*" background /home/debauer/Bilder/Wallpaper/girlnight.jpg fill
+
