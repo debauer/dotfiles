@@ -1,5 +1,13 @@
 set $mod Mod4
-set $term alacritty
+
+font xft:URWGothic-Book 10
+font pango:DejaVu Sans Mono 10
+
+set $hostname default
+
+include "~/.config/sway/config.`hostnamectl hostname`"
+
+set $term alacritty --config-file ~/.config/alacritty/alacritty.$hostname.yml
 
 input type:keyboard xkb_capslock disabled
 input type:keyboard xkb_numlock disabled
@@ -8,22 +16,7 @@ default_border none
 default_floating_border none
 hide_edge_borders none
 
-
-#font xft:URWGothic-Book 10
-#font pango:DejaVu Sans Mono 10
-font xft:URWGothic-Book 10
-font pango:DejaVu Sans Mono 10
 floating_modifier $mod
-
-set $ws1 1:1:FIREFOX
-set $ws2 2:2:IDE
-set $ws3 3:3:CHROME
-set $ws4 4:4:TERM
-set $ws5 5:5:TERM
-set $ws6 6:6:TERM
-set $ws7 7:7:MESSANGER
-set $ws8 8:8:MEDIA
-
 
 bindsym $mod+u border none
 bindsym $mod+y border pixel 1
@@ -237,7 +230,7 @@ exec_always --no-startup-id killall nm-applet; sleep1; nm-applet --indicator
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id blueman-applet
-exec --no-startup-id killall mako; sleep1; mako --config .config/mako/mako.conf
+exec_always --no-startup-id killall mako; sleep1; mako --config .config/mako/mako.conf
 exec --no-startup-id ff-theme-util
 exec --no-startup-id fix_xcursor
 
@@ -249,7 +242,7 @@ bar {
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
 
-    swaybar_command waybar
+    swaybar_command waybar-custom
     status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
 
     colors {
@@ -280,18 +273,6 @@ bar {
 # Set inner/outer gaps
 gaps inner 15
 gaps outer 0
-
-# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
-# gaps inner|outer current|all set|plus|minus <px>
-# gaps inner all set 10
-# gaps outer all plus 5
-
-# Smart gaps (gaps used if only more than one container on the workspace)
-#smart_gaps on
-
-# Smart borders (draw borders around container only if it is not the only container on this workspace)
-# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-#smart_borders no_gaps
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -330,14 +311,8 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-
 exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
-include "~/.config/sway/config.`hostnamectl hostname`"
 
-exec_always --no-startup-id swaymsg output eDP-1      pos 2720 490 mode 1920 1200
-exec_always --no-startup-id swaymsg output DP-1       pos 4640 250 mode 3440 1440
-exec_always --no-startup-id swaymsg output HDMI-A-1   pos 8080 0 mode 2560 1440 transform 90
-exec_always --no-startup-id swaymsg output DP-2       pos 5380 1690 mode 1920 1080
-exec_always --no-startup-id swaymsg output "*" background /home/debauer/Bilder/Wallpaper/girlnight.jpg fill
+

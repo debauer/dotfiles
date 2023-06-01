@@ -1,2 +1,1 @@
---ignore .stowrc
--v
+-v -R

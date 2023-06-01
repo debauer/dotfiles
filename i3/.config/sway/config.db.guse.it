@@ -1,5 +1,13 @@
-exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+set $hostname db.guse.it
+
+set $ws1 1:1:FIREFOX
+set $ws2 2:2:IDE
+set $ws3 3:3:CHROME
+set $ws4 4:4:TERM
+set $ws5 5:5:TERM
+set $ws6 6:6:TERM
+set $ws7 7:7:MESSANGER
+set $ws8 8:8:MEDIA
 
 exec_always --no-startup-id swaymsg output eDP-1    pos 2720 1200 mode 1920 1200                 # "Chimei Innolux Corporation 0x14F2 0x00000000"
 exec_always --no-startup-id swaymsg output DP-3     pos 4640 250 mode 3440 1440                 # "Goldstar Company Ltd LG ULTRAWIDE 108NTMX8E219"
