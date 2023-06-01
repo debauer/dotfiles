@@ -10,14 +10,19 @@ source $HOME/.profile
 
 export HONDA_WORKDIR="$HOME/projects/honda"
 export HONDA_DEFAULT_CONTAINER_RUNTIME="podman"
+export HONDA_DEFAULT_CONTAINER_NETWORK=private
 export REGISTRY_AUTH_FILE=$HOME/.config/podman/auth.json
 HONDA_ENVFILE="$HONDA_WORKDIR/hri-tools/shell/honda.env"
 _HONDA_LOADER="$HONDA_WORKDIR/hri-tools/shell/zshrc.honda"
 test -f "$_HONDA_LOADER" && source $HOME/projects/honda/hri-tools/shell/zshrc.honda
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+export TERM=xterm
 export PATH=$HOME/scripts:$PATH
+
+
+
 export PATH=$HOME/projects/honda/hri-tools:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
@@ -27,17 +32,14 @@ export OATH=$HOME/.dotnet/tools:$PATH
 export PATH=$PATH:~/.platformio/penv/bin:/opt/cuda-11.1/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda-11.1/lib64
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
 
+# ===== ZSH =====
+
+export ZSH=$HOME/.oh-my-zsh
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 

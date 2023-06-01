@@ -6,7 +6,7 @@ from argparse import ArgumentParser, Namespace
 connections = {
     "jetson": ("automodal", "synyx123", "192.168.1.96:3389"),
     "sdr": ("pi", "raspberry", "192.168.1.112:3389"),
-    "windows": ("debauer", "123456", "192.168.1.84:3389"),
+    "windows": ("debauer", "123456", "192.168.1.100:3389"),
     "windows-extern": ("debauer", "123456", "localhost:13389"),
 }
 
