@@ -226,11 +226,13 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec_always --no-startup-id killall nm-applet; sleep1; nm-applet --indicator
+exec --no-startup-id mako --config .config/mako/mako.conf
+exec --no-startup-id nm-applet --indicator
+#exec_always --no-startup-id killall nm-applet; sleep 1; nm-applet --indicator
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id blueman-applet
-exec_always --no-startup-id killall mako; sleep1; mako --config .config/mako/mako.conf
+#exec_always --no-startup-id killall mako; sleep 1; mako --config .config/mako/mako.conf
 exec --no-startup-id ff-theme-util
 exec --no-startup-id fix_xcursor
 
