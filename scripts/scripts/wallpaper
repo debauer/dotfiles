@@ -1,0 +1,38 @@
+#!/home/debauer/.dotfiles/scripts/scripts/.venv/bin/python3
+import subprocess
+from argparse import ArgumentParser
+from dataclasses import dataclass
+from pathlib import Path
+
+from helper.process import command_silent
+
+
+@dataclass
+class Wallpaper:
+    path: Path
+    name: str = ""
+    
+
+
+
+if __name__ == "__main__":
+    wallpaper_folder = Path("/home/debauer/Bilder/Wallpaper/")
+    wallpaper_glob = wallpaper_folder.glob("**/*")
+    
+    wallpaper = [Wallpaper(wg, name=wg.name.split(".")[0]) for wg in wallpaper_glob]
+    choices = [wg.name for wg in wallpaper]
+    print(wallpaper)
+    print(choices)
+    
+    parser = ArgumentParser(description="System to record the data on a trimodal crane")
+    
+    parser.add_argument("wallpaper", type=str, help="wallpaper", choices=choices)
+        
+    wallpaper_name = parser.parse_args().wallpaper
+    for w in wallpaper:
+        if w.name == wallpaper_name:
+            print("run commands:")
+            command = f"swaymsg output '*' background {w.path} fill"
+            command_silent(command, verbose=True)
+            print("done")
+

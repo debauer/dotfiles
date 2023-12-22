@@ -30,7 +30,7 @@ set $launcher exec $term --class=launcher -e sway-launcher-desktop
 bindsym $mod+d exec $launcher
 
 for_window [app_id="^menue$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-set $menu exec $term --class=menue -e menue.py
+set $menu exec $term --class=launcher -e /home/debauer/utils/.venv/bin/menue
 bindsym $mod+m exec $menu
 
 
@@ -42,7 +42,7 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym XF86AudioMicMute exec ~/scripts/spotify_toggle_volume.sh
 
 
-bindsym $mod+f3 exec nautilus
+bindsym $mod+f3 exec nemo
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -315,6 +315,4 @@ mode "$mode_gaps_outer" {
 
 exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
-
-
+exec sway-launcher-desktop.sh purge

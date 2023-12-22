@@ -1,0 +1,72 @@
+#!/home/debauer/.dotfiles/scripts/scripts/.venv/bin/python3
+
+from argparse import ArgumentParser
+import subprocess
+from dataclasses import dataclass
+
+default_password_file = "/home/debauer/.resticcredentials"
+default_exclude_file = "/home/debauer/scripts/config/backup_ignore"
+
+
+@dataclass
+class BackupHost:
+    target: str = ""
+    password_file: str = default_password_file
+    host: str = ""
+    
+
+
+@dataclass
+class BackupConfig:
+    host: BackupHost
+    sudo: bool = False
+    source: str = ""
+    exclude_file: str = default_exclude_file
+
+    def command_str(self) -> str:
+        return (f"{'sudo ' if self.sudo else ''}restic -r {self.host.host}{self.host.target} "
+                f"--verbose "
+                f"backup "
+                f"--password-file '{self.host.password_file}' "
+                f"--exclude-file {self.exclude_file} "
+                f"{self.source} ")
+
+herbert = BackupHost(
+    host="sftp:debauer@herbert:",
+    target="/mnt/data/backups/synyx_t14/restic"
+)
+
+target = [
+    BackupConfig(host= herbert, source="/etc", sudo=True),
+    BackupConfig(host= herbert, source="/home/debauer")
+]
+
+
+def parse():
+    parser = ArgumentParser(description="Backup System")
+    parser.add_argument("-n", "--dry-run", action='store_const', const="dryrun", help="dry-run")
+    parser.add_argument("-v", "--verbose", action='store_const', const="verbose", help="verbose")
+    return parser.parse_args()
+
+
+def _backup(conf: BackupConfig, *, verbose: bool = False, dryrun: bool = False) -> None:
+    try:
+        print(conf.command_str())
+        connect = subprocess.Popen(args=conf.command_str(), shell=True)
+        while connect.poll() is None:
+            pass
+    except KeyboardInterrupt:
+        exit()
+
+
+def _main():
+    args = parse()
+    verbose = args.verbose
+    dryrun = args.dryrun
+    
+    for t in target:
+        _backup(t, verbose=verbose, dryrun=dryrun)
+
+
+if __name__ == "__main__":
+    _main()

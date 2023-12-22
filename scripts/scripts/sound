@@ -1,36 +1,54 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
+from dataclasses import dataclass
+
 from typing import List
 
 import pulsectl
 from pulsectl import PulseSinkInfo, PulseClientInfo, PulseOperationFailed, PulseSinkInputInfo
 
-from helper.notify import notify
-
 pulse = pulsectl.Pulse("my-client-name")
 
-my_sinks = {
-    "internal": "Family 17h/19h HD Audio Controller",
-    "boxen": "Sound Blaster Play!",
-    "bayer": "USB HIFI Audio",
-    "bose": "Bose David"
-}
+@dataclass
+class SinkDefinition:
+    name: str
+    device_name: str
+    
+class Sinks:
+    sinks = [
+        SinkDefinition("internal", "Family 17h/19h HD Audio Controller"),
+        SinkDefinition("boxen", "Sound Blaster Play!"),
+        SinkDefinition("bayer", "USB HIFI Audio"),
+        SinkDefinition("bose", "Bose David")
+    ]
+    
+    def get_sink_names(self):
+        return [s.name for s in self.sinks]
+    
+    def get_sink_by_name(self, name: str) -> SinkDefinition:
+        for s in self.sinks:
+            if s.name == name:
+                return s
+        raise ValueError(f"sink not found {name=}")
+
+    def get_sink_by_device_name(self, device_name: str) -> SinkDefinition:
+        for s in self.sinks:
+            if s.device_name == device_name:
+                return s
+        return SinkDefinition("NOT DEFINED","NOT DEFINED")
+        #raise ValueError(f"sink not found {device_name=}")
+
+my_sinks = Sinks()
 
 def find_sink(name: str, verbose: bool = False) -> PulseSinkInfo:
     sinks: List[PulseSinkInfo] = pulse.sink_list()
     for s in sinks:
-        if s.proplist["device.description"] == my_sinks[name]:
+        if s.proplist["device.description"] == my_sinks.get_sink_by_name(name):
             if verbose:
                 print("found sink:")
                 print(" ", s)
             return s
-        
-
-def find_short_name(name: str) -> str:
-    for ms in my_sinks:
-        if my_sinks[ms] == name:
-            return ms
         
 def default_sink(verbose: bool = False) -> None:
     sinks: List[PulseSinkInfo] = pulse.sink_list()
@@ -38,7 +56,7 @@ def default_sink(verbose: bool = False) -> None:
         if verbose:
             if s.proplist["node.name"] == pulse.server_info().default_sink_name:
                 print("default sink:")
-                print(" ", find_short_name(s.proplist["device.description"]))
+                print(" ", my_sinks.get_sink_by_device_name(s.proplist["device.description"]))
     
         
 def active_sink(verbose: bool = False) -> PulseSinkInfo:
@@ -47,15 +65,18 @@ def active_sink(verbose: bool = False) -> PulseSinkInfo:
         if s.state._value == "running":
             if verbose:
                 print("active sink:")
-                print(" ", find_short_name(s.proplist["device.description"]))
+                print(" ", my_sinks.get_sink_by_device_name(s.proplist["device.description"]))
             return s
 
 def available_sinks(verbose: bool = False) -> None:
     sinks: List[PulseSinkInfo] = pulse.sink_list()
     if verbose:
         print("available sinks:")
+        print()
+        print(f'long name                                     || name          || state        || device.id')
+        print(f'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
         for s in sinks:
-            print(f'description:{s.proplist["device.description"]} || short_name:{find_short_name(s.proplist["device.description"])} || state:{s.state._value} || device.id:{s.proplist["device.id"]}')
+            print(f'{s.proplist["device.description"]:<45} || {my_sinks.get_sink_by_device_name(s.proplist["device.description"]).name:<13} || {s.state._value:<12} || device.id: {s.proplist["device.id"]}')
 
 def available_input_sinks(verbose: bool = False) -> List[PulseSinkInputInfo]:
     sinks: List[PulseSinkInputInfo] = pulse.sink_input_list()
@@ -80,7 +101,7 @@ def menue_item():
 
 def parse():
     parser = ArgumentParser(description="System to record the data on a trimodal crane")
-    parser.add_argument("device", type=str, help="device", choices=my_sinks.keys())
+    parser.add_argument("-d", "--device", type=str, help="device", choices=my_sinks.get_sink_names())
     parser.add_argument("-v", "--verbose", action='store_const', const="verbose", help="verbose")
     return parser.parse_args()
 
@@ -116,7 +137,10 @@ def _main():
     available_clients(verbose)
     default_sink(verbose)
     
-    switch(device, verbose)
+    if device is not None:
+        switch(device, verbose)
+    else: 
+        available_sinks(verbose=True) 
     #notify("sound.py", "1337", f"changed sink to: {device}")
     exit()
 

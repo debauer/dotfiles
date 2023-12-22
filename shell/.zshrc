@@ -27,6 +27,7 @@ export PATH=$HOME/projects/honda/hri-tools:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/utils/.venv/bin2:$PATH
 export PATH="$HOME/rust/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin:$PATH"
 
 
@@ -34,7 +35,7 @@ export OATH=$HOME/.dotnet/tools:$PATH
 export PATH=$PATH:~/.platformio/penv/bin:/opt/cuda-11.1/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda-11.1/lib64
 
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+#export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin"
 
 # ===== ZSH =====
@@ -105,7 +106,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions poetry z systemd sudo history copypath copyfile)
+plugins=(git zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions poetry z systemd sudo history copypath copyfile kubectl-autocomplete)
 
 ## Keybindings section
 bindkey -e

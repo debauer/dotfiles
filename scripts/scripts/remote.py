@@ -6,17 +6,17 @@ from argparse import ArgumentParser, Namespace
 connections = {
     "jetson": ("automodal", "synyx123", "192.168.1.96:3389"),
     "sdr": ("pi", "raspberry", "192.168.1.112:3389"),
-    "windows": ("debauer", "123456", "192.168.1.100:3389"),
+    "windows": ("debauer", "123456", "192.168.1.84:3389"),
     "windows-extern": ("debauer", "123456", "localhost:13389"),
 }
+
 
 def parse_args() -> Namespace:
     parser = ArgumentParser(description="System to record the data on a trimodal crane")
 
-    parser.add_argument(
-        "connection", type=str, help="connection", choices=connections.keys()
-    )
+    parser.add_argument("connection", type=str, help="connection", choices=connections.keys())
     return parser.parse_args()
+
 
 if __name__ == "__main__":
     args = parse_args()

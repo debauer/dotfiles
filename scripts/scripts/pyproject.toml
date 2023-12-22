@@ -1,0 +1,74 @@
+[tool.poetry]
+name = "scripts"
+version = "0.1.0"
+description = ""
+authors = ["debauer <debauer@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+clipboard = "^0.0.4"
+pulsectl = "^23.5.2"
+keyboard = "^0.13.5"
+youtube-dl = "^2021.12.17"
+ruff = "^0.1.0"
+black = "^23.9.1"
+mypy = "^1.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line_length = 120
+
+[tool.mypy]
+python_version = "3.8"
+files = "src"
+
+strict = true
+
+warn_return_any = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+show_error_context = true
+show_error_codes = true
+show_column_numbers = true
+pretty = true
+
+[tool.ruff]
+select = ["ALL", "PLR6301"]
+preview = true
+ignore = [
+    "D1",      # docstrings
+    "D406",    # weird section heading things
+    "D203",    # one-blank-line-before-class
+    "D212",    # multi-line-summary-first-line
+    "ERA001",  # Commented out code found
+    "PLC0414", # useless import alias
+    "TCH",     # type checking blocks
+    "ANN10",   # typing self and cls
+    "FIX002",  # TODO anywhere in comments
+    "CPY001",  # Copyright notices until configurable
+    "A003",
+    "E203",    # space before ':' has some inconsitencies with black
+]
+
+line-length = 120
+target-version = "py38"
+
+
+[tool.ruff.isort]
+force-single-line = true
+lines-between-types = 1
+lines-after-imports = 2
+known-first-party = ["risk_model"]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "all"

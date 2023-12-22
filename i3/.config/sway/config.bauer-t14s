@@ -10,8 +10,10 @@ set $ws7 7:7:MESSANGER
 set $ws8 8:8:MEDIA
 
 exec_always --no-startup-id swaymsg output  eDP-1  pos 2720 490 mode 1920 1200                  #  "California Institute of Technology 0x1404 Unknown"
+exec_always --no-startup-id swaymsg output  DP-10   pos 4640 250 mode 3440 1440                  #  "LG Electronics LG ULTRAWIDE 108NTMX8E219"
 exec_always --no-startup-id swaymsg output  DP-8   pos 4640 250 mode 3440 1440                  #  "LG Electronics LG ULTRAWIDE 108NTMX8E219"
+exec_always --no-startup-id swaymsg output  DP-9   pos 8080 0 mode 2560 1440 transform 90       #  "ASUSTek COMPUTER INC PA278QV L8LMQS118493"
 exec_always --no-startup-id swaymsg output  DP-11   pos 8080 0 mode 2560 1440 transform 90       #  "ASUSTek COMPUTER INC PA278QV L8LMQS118493"
 exec_always --no-startup-id swaymsg output  DP-2   pos 5300 1690 mode 1920 1080                 #  "Lenovo Group Limited M14 V907GCGW"
 
-exec_always --no-startup-id swaymsg output "*" background /home/debauer/Bilder/Wallpaper/girlnight.jpg fill
+exec_always --no-startup-id swaymsg output "*" background /home/debauer/Bilder/Wallpaper/mountain1.jpg fill

@@ -1,4 +1,0 @@
-pulsectl
-keyboard
-clipboard
-myjdapi

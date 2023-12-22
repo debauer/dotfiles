@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ ${HTTPS_PROXY:-} =~ .*localhost.* ]] ||
+    [[ ${HTTP_PROXY:-} =~ .*localhost.* ]] ||
+    [[ ${https_proxy:-} =~ .*localhost.* ]] ||
+    [[ ${http_proxy:-} =~ .*localhost.* ]]; then
+    unset HTTP_PROXY HTTP_PROXY https_proxy http_proxy
+fi
+
+cmd=/usr/bin/podman
+if [ "$1" = compose ]; then
+    cmd="/usr/bin/podman-compose"
+    shift
+fi
+
+exec "$cmd" "$@" 
