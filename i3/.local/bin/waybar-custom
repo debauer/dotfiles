@@ -1,0 +1,19 @@
+#!/bin/sh
+HOSTNAME=$(hostnamectl hostname)
+
+CONFIG_PATH=~/.config/waybar/config.$HOSTNAME
+STYLE_PATH=~/.config/waybar/style.$HOSTNAME.css
+CONFIG_ARG=""
+STYLE_ARG=""
+
+
+if [ -f $STYLE_PATH ]; then
+    STYLE_ARG="--style $STYLE_PATH"
+fi 
+
+
+if [ -f $CONFIG_PATH ]; then
+    CONFIG_ARG="--config $CONFIG_PATH"
+fi 
+
+exec waybar $CONFIG_ARG $STYLE_ARG

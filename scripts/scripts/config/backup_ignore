@@ -1,0 +1,40 @@
+# .config/restic/excludelist.txt
+.local
+.cache
+
+# weird things that don't know how the world works
+.conan2
+.config/Morgen/Cache
+.cargo
+.rustup
+.npm
+
+# hri / SIT
+work/honda/hri
+
+# artifacts of any kind
+projects/**/dist
+projects/**/target
+projects/honda/**/build
+projects/honda/**/devel
+projects/honda/**/Docker/gitlab
+
+# tool caches
+.mypy_cache
+.ruff_cache
+.pytest_cache
+
+# environments of any kind
+node_modules
+
+venv
+.venv
+.rosenv
+
+# model files
+*.pth
+
+
+.config/Element
+.config/Element-Nightly
+.

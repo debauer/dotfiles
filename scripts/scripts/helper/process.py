@@ -2,15 +2,17 @@ import subprocess
 import shlex
 
 import re
-PATTERN = re.compile(r'''((?:[^;"']|"[^"]*"|'[^']*')+)''')
+
+PATTERN = re.compile(r"""((?:[^;"']|"[^"]*"|'[^']*')+)""")
+
 
 def command_silent(command: str, verbose: bool = False):
     if verbose:
         print("[command_silent] " + command)
     subprocess.Popen(args=command, shell=True)
-    
-    
-def command_print(command: str, timeout: int = 2, verbose: bool = False) -> str:
+
+
+def command_print(command: str, timeout: float | None = 2.0, verbose: bool = False) -> str:
     if verbose:
         print(command)
         print(shlex.split(command))

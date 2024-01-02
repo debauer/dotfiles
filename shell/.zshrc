@@ -5,24 +5,44 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+source $HOME/.profile
+
+
+export HONDA_WORKDIR="$HOME/projects/honda"
+export HONDA_DEFAULT_CONTAINER_RUNTIME="podman"
+export HONDA_DEFAULT_CONTAINER_NETWORK=private
+export REGISTRY_AUTH_FILE=$HOME/.config/podman/auth.json
+HONDA_ENVFILE="$HONDA_WORKDIR/hri-tools/shell/honda.env"
+_HONDA_LOADER="$HONDA_WORKDIR/hri-tools/shell/zshrc.honda"
+test -f "$_HONDA_LOADER" && source $HOME/projects/honda/hri-tools/shell/zshrc.honda
+
+
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+export TERM=xterm
 export PATH=$HOME/scripts:$PATH
+
+
+
+export PATH=$HOME/projects/honda/hri-tools:$PATH
 export PATH=$HOME/go/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/utils/.venv/bin2:$PATH
 export PATH="$HOME/rust/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin:$PATH"
+
 
 export OATH=$HOME/.dotnet/tools:$PATH
 export PATH=$PATH:~/.platformio/penv/bin:/opt/cuda-11.1/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda-11.1/lib64
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/debauer/.oh-my-zsh"
+#export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+# ===== ZSH =====
+
+export ZSH=$HOME/.oh-my-zsh
+export CLICOLOR=1
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
@@ -86,7 +106,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions poetry z systemd sudo history copypath copyfile kubectl-autocomplete)
 
 ## Keybindings section
 bindkey -e
@@ -175,6 +195,8 @@ alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
 alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
 alias set-github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
 alias killcods="sudo kill -9 $(pgrep -f 'cods|CODS')"
+alias honda_socks_proxy="docker run -d -it -v $HOME/projects/honda/socks-to-http-proxy/urls:/urls --network=host s2h --listen 0.0.0.0:6969 --socks5 127.0.0.1:1080 --filename /urls/honda.txt"
+
 
 ## Function section 
 function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
@@ -225,3 +247,5 @@ function gi {
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval "$(atuin init zsh --disable-up-arrow)"

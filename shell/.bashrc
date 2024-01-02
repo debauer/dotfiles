@@ -56,8 +56,8 @@ alias fgrep='fgrep --colour=auto'
 
 export LS_OPTIONS='--color=auto -h'
 export EDITOR='nano'
-export PATH="$PATH:/home/bauer/toolchain/flutter/bin"
-export PATH="$PATH:/home/bauer/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 unset use_color safe_term match_lhs sh
 
@@ -156,3 +156,6 @@ xset -b #disable terminal beep
 
 export CUDA_INSTALL_DIR=/opt/cuda-10.1
 . "$HOME/.cargo/env"
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
