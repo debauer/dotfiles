@@ -19,7 +19,6 @@ test -f "$_HONDA_LOADER" && source $HOME/projects/honda/hri-tools/shell/zshrc.ho
 
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 export TERM=xterm
-export PATH=$HOME/scripts:$PATH
 
 
 
@@ -28,7 +27,6 @@ export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/utils/.venv/bin2:$PATH
-export PATH="$HOME/rust/arm/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf/bin:$PATH"
 
 
 export OATH=$HOME/.dotnet/tools:$PATH

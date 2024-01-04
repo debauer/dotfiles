@@ -15,10 +15,12 @@ function install_zsh {
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
     git clone https://github.com/debauer/dotfiles .dotfiles
+    bash <(curl https://raw.githubusercontent.com/atuinsh/atuin/main/install.sh)
     rm .config/htop/htoprc
     rm .bashrc
     rm .bash_profile
     rm .zshrc
+    rm .profile
     cd .dotfiles
     stow shell
 }
