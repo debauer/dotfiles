@@ -14,6 +14,7 @@ export HONDA_DEFAULT_CONTAINER_NETWORK=private
 export REGISTRY_AUTH_FILE=$HOME/.config/podman/auth.json
 HONDA_ENVFILE="$HONDA_WORKDIR/hri-tools/shell/honda.env"
 _HONDA_LOADER="$HONDA_WORKDIR/hri-tools/shell/zshrc.honda"
+export ANSIBLE_VAULT_PASSWORD_FILE=".vault_pass"
 test -f "$_HONDA_LOADER" && source $HOME/projects/honda/hri-tools/shell/zshrc.honda
 
 
@@ -191,9 +192,7 @@ alias gitk="gitk --all"
 alias subl="subl -a"
 alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
 alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
-alias set-github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
-alias killcods="sudo kill -9 $(pgrep -f 'cods|CODS')"
-alias honda_socks_proxy="docker run -d -it -v $HOME/projects/honda/socks-to-http-proxy/urls:/urls --network=host s2h --listen 0.0.0.0:6969 --socks5 127.0.0.1:1080 --filename /urls/honda.txt"
+alias github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
 
 
 ## Function section 
@@ -242,6 +241,9 @@ function gi {
         curl -L -s "https://www.gitignore.io/api/${x// /,}"                                                                                                                                                                                     
     fi                                                                                                                                                                                                                                          
 }   
+
+
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -1,5 +1,4 @@
 .idea
-.ssh
-!.ssh/config
-!.ssh/authorized_keys
+ssh/.ssh/authorized_keys
 *.pyc
+deep_stow
