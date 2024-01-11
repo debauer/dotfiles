@@ -105,7 +105,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-history-substring-search zsh-syntax-highlighting zsh-autosuggestions poetry z systemd sudo history copypath copyfile kubectl-autocomplete)
+plugins=(you-should-use git zsh-history-substring-search zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions poetry z systemd sudo history copypath copyfile kubectl-autocomplete ansible archlinux cp docker docker-compose poetry poetry-env ros screen systemd)
+
+#autoload -Uz history-beginning-search-menu
+#zle -N history-beginning-search-menu
+#bindkey '^X^X' history-beginning-search-menu
 
 ## Keybindings section
 bindkey -e
@@ -178,25 +182,51 @@ alias cp="cp -i"                                                # Confirm before
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -h'
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
-alias lsh='ls -lah'
 alias np='nano -w PKGBUILD'
 alias more=less
-alias grep='grep --color'
 alias pacman='pacman --color=auto'
 alias dmesg='dmesg -T --color'
-alias gitk="gitk --all"
 alias subl="subl -a"
 alias lsblk="lsblk -o name,mountpoint,size,type,ro,label,uuid"
 alias mosquitto_sub="mosquitto_sub -F '%t %r %p'"
 alias github-git-config='git config user.email "debauer@users.noreply.github.com" && git config user.name "debauer"'
+alias tr33="tree . -L 2 -u -D"
+alias uptime='uptime --pretty'
+alias inxi='inxi -F'
+
+alias gitk="gitk --all"
+alias gk="gitk --all"
+alias g="git"
+alias gg="git gui"
+alias gs="git status"
+alias gfp="git fetch --prune"
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+alias lsh='ls -lah'
+alias l='lsd -l'
+alias la='lsd -la'
+
+alias sudo='sudo '
+
+alias path='echo -e ${PATH//:/\\n}'
+alias pythonpath='echo -e ${PYTHONPATH//:/\\n}'
+
+alias j="journalctl"
+alias jf="journalctl -f"
+alias sctl="systemctl"
 
 
 ## Function section 
 function avault() { ansible-vault "$1" --vault-password-file .vault_pass "$2";}
+function backlight() { echo "$1" > /sys/class/backlight/amdgpu_bl1/brightness;}
 function aplaybook() { ansible-playbook --vault-password-file .vault_pass -i hosts.yml "$@";}
 function install_zsh_plugins () {
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
@@ -241,9 +271,6 @@ function gi {
         curl -L -s "https://www.gitignore.io/api/${x// /,}"                                                                                                                                                                                     
     fi                                                                                                                                                                                                                                          
 }   
-
-
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
