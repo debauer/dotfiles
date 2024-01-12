@@ -22,7 +22,6 @@ export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 export TERM=xterm
 
 
-
 export PATH=$HOME/projects/honda/hri-tools:$PATH
 export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
@@ -43,7 +42,6 @@ export ZSH=$HOME/.oh-my-zsh
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -105,7 +103,27 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(you-should-use git zsh-history-substring-search zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions poetry z systemd sudo history copypath copyfile kubectl-autocomplete ansible archlinux cp docker docker-compose poetry poetry-env ros screen systemd)
+plugins=(
+    ansible
+    archlinux
+    cp
+    docker
+    docker-compose
+    git
+    history
+    kubectl-autocomplete
+    poetry
+    poetry-env
+    screen 
+    sudo
+    systemd
+    zsh-you-should-use
+    z
+    zsh-autocomplete
+    zsh-autosuggestions
+    zsh-history-substring-search
+    zsh-syntax-highlighting
+)
 
 #autoload -Uz history-beginning-search-menu
 #zle -N history-beginning-search-menu
@@ -123,20 +141,36 @@ bindkey '^[[F' end-of-line                                     # End key
 if [[ "${terminfo[kend]}" != "" ]]; then
   bindkey "${terminfo[kend]}" end-of-line                       # [End] - Go to end of line
 fi
-bindkey '^[[2~' overwrite-mode                                  # Insert key
-bindkey '^[[3~' delete-char                                     # Delete key
-bindkey '^[[C'  forward-char                                    # Right key
-bindkey '^[[D'  backward-char                                   # Left key
-bindkey '^[[5~' history-beginning-search-backward               # Page up key
-bindkey '^[[6~' history-beginning-search-forward                # Page down key
+#bindkey '^[[2~' overwrite-mode                                  # Insert key
+#bindkey '^[[3~' delete-char                                     # Delete key
+#bindkey '^[[C'  forward-char                                    # Right key
+#bindkey '^[[D'  backward-char                                   # Left key
+#bindkey '^[[5~' history-beginning-search-backward               # Page up key
+#bindkey '^[[6~' history-beginning-search-forward                # Page down key
 
 # Navigate words with ctrl+arrow keys
-bindkey '^[Oc' forward-word                                     #
-bindkey '^[Od' backward-word                                    #
-bindkey '^[[1;5D' backward-word                                 #
-bindkey '^[[1;5C' forward-word                                  #
-bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
-bindkey '^[[Z' undo                                             # Shift+tab undo last action
+#bindkey '^[Oc' forward-word                                     #
+#bindkey '^[Od' backward-word                                    #
+#bindkey '^[[1;5D' backward-word                                 #
+#bindkey '^[[1;5C' forward-word                                  #
+#bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
+#bindkey '^[[Z' undo                                             # Shift+tab undo last action
+
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+bindkey '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+
+# all Tab widgets
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+
+# all history widgets
+zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+
+# ^S
+zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
+
+bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
 ## Options section
 #setopt correct                                                  # Auto correct mistakes
@@ -276,3 +310,4 @@ function gi {
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(atuin init zsh --disable-up-arrow)"
+
